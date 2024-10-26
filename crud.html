@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        color:black;
+    }
+
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+    }
+
+    form {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        width: 200px;
+        border: 1px solid;
+        border-radius: 4px;
+        margin-right: 10px;
+    }
+
+    button {
+        margin: 20px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        background-color: #3b5e12;
+        color: white;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        background-color: #fff;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    li:hover {
+        background-color: #eaeaea;
+    }
+</style>
+  <body>
+
+  <h1>Afegir, eliminar i modificar elements a la llista</h1>
+
+  <form>
+    <label for="entradaText">Introdueix un element per afegir, eliminar o modificar a la llista:</label>
+    <input type="text" id="entradaText" name="entradaText"><br>
+    <button type="button" onclick="afegirNouElement()">Afegir</button>
+    <button type="button" onclick="eliminarElement()">Elminar</button>
+    <button type="button" onclick="modificarElement()">Modificar</button>
+  </form>
+
+  <ul id="llista">
+  </ul>
+
+  <script>
+    function afegirNouElement(){
+      //guardo el text introduit a l'input en una variable
+      //i guardo en un variable el id de l'element ul
+      let inputEntrada = document.getElementById('entradaText');
+      //console.log(inputEntrada);
+      let llista = document.getElementById('llista');
+      //let nouElementLlista=document.createElement('li');
+
+      //creo l'element llista si té algún valor, el valor pe defecte és el text introduit a l'input.
+      //i si té valor creo el nou element amb creareElement i l'afegeixo amb append a l'element de llista ul
+      //un element més li
+      if (inputEntrada.value !== "") {
+        let nouElementLlista = document.createElement("li");
+        //accedeixo a la variable de valor guardat i l'hi canvio el nom
+        nouElementLlista.innerHTML=inputEntrada.value;
+        llista.append(nouElementLlista);
+
+        } else {
+            alert("Has d'introduir un text a l'element nou");
+        }
+      }
+
+      function eliminarElement(){
+        //guardo el text introduit a l'input en una variable
+        let inputEntrada = document.getElementById('entradaText').value;
+        let llista =document.getElementById('llista');
+        let trobat=false;
+
+        //recorro la llista per trobar l'element
+        for (let i=0; i<llista.children.length; i++){
+          if(llista.children[i].textContent==inputEntrada){
+            llista.children[i].remove();
+            trobat = true;
+            break;
+          }
+        }
+        if(!trobat){
+          alert("Element no trobat a la llista");
+        } 
+      }
+
+      function modificarElement(){
+        let inputEntrada=document.getElementById('entradaText').value;
+        let llista =document.getElementById('llista');
+        let trobat = false;
+
+        //recorro la llista per trobar l'element
+        for (let i=0; i<llista.children.length; i++){
+          if(llista.children[i].textContent==inputEntrada){
+            let nouText = prompt("Per quin nom el vols canviar?", inputEntrada);
+            if(nouText!==null){
+              llista.children[i].textContent=nouText;
+            }
+            trobat=true;
+            break;
+          }
+        }
+        if(!trobat){
+           alert("Element no trobat a la llista");
+        }
+      } 
+  
+
+    //console.log(document.getElementById("fname"));
+    //document.getElementById("infolog").innerHTML = document.getElementById("fname").value;  
+  </script>
+
+  </body>
+</html>
+
+<body>
+
